@@ -17,6 +17,29 @@ import {
     ColorValue,
 } from 'react-native'
 
+export type EnterTransition =
+    | 'fadeIn'
+    | 'curlDown'
+    | 'curlUp'
+    | 'flipBottom'
+    | 'flipLeft'
+    | 'flipRight'
+    | 'flipTop'
+    | 'none'
+
+const enterTransition = {
+    fadeIn: 'fadeIn',
+    /** iOS only */
+    curlDown: 'curlDown',
+    /** iOS only */
+    curlUp: 'curlUp',
+    flipBottom: 'flipBottom',
+    flipLeft: 'flipLeft',
+    flipRight: 'flipRight',
+    flipTop: 'flipTop',
+    none: 'none',
+} as const
+
 export type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center'
 
 const resizeMode = {
@@ -30,7 +53,7 @@ export type Animation = 'none' | 'fade'
 
 const animation = {
     none: 'none',
-    fade: 'fade'
+    fade: 'fade',
 } as const
 
 export type Priority = 'low' | 'normal' | 'high'
@@ -94,6 +117,18 @@ export interface FastImageProps extends AccessibilityProps, ViewProps {
     resizeMode?: ResizeMode
     animation?: Animation
     fallback?: boolean
+
+    /**
+     * Transition durations.
+     * @default none
+     */
+    enterTransition?: EnterTransition
+
+    /**
+     * Enter transition duration in ms.
+     * @default 500ms
+     */
+    transitionDuration?: number
 
     onLoadStart?(): void
 
@@ -216,9 +251,10 @@ function FastImageBase({
     const resolvedSource = Image.resolveAssetSource(source as any)
     const resolvedDefaultSource = resolveDefaultSource(defaultSource)
 
-    const resultSource = Platform.OS === 'android'
-        ? Object.assign({}, resolvedSource, { blurRadius: blurRadius })
-        : resolvedSource
+    const resultSource =
+        Platform.OS === 'android'
+            ? Object.assign({}, resolvedSource, { blurRadius: blurRadius })
+            : resolvedSource
 
     return (
         <View style={[styles.imageContainer, style]} ref={forwardedRef}>
@@ -254,6 +290,7 @@ FastImageComponent.displayName = 'FastImage'
 
 export interface FastImageStaticProperties {
     blurRadius: number
+    enterTransition: typeof enterTransition
     animation: typeof animation
     resizeMode: typeof resizeMode
     priority: typeof priority
@@ -271,6 +308,8 @@ FastImage.resizeMode = resizeMode
 FastImage.cacheControl = cacheControl
 
 FastImage.priority = priority
+
+FastImage.enterTransition = enterTransition
 
 FastImage.animation = animation
 

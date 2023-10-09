@@ -89,6 +89,17 @@ class FastImageViewManager extends SimpleViewManager<FastImageViewWithUrl> imple
         view.setAnimation(animationType);
     }
 
+    @ReactProp(name = "enterTransition")
+    public void setEnterTransition(FastImageViewWithUrl view, String enterTransition) {
+        final FastImageEnterTransition transition = FastImageViewConverter.getEnterTransition(enterTransition);
+        view.setEnterTransition(transition);
+    }
+
+    @ReactProp(name = "transitionDuration")
+    public void setTransitionDuration(FastImageViewWithUrl view, int transitionDuration) {
+        view.setTransitionDuration(transitionDuration);
+    }
+
     @Override
     public void onDropViewInstance(@NonNull FastImageViewWithUrl view) {
         // This will cancel existing requests.

@@ -32,6 +32,8 @@ class FastImageViewWithUrl extends AppCompatImageView {
     private ReadableMap mSource = null;
     private Drawable mDefaultSource = null;
     private FastImageAnimation mAnimation = FastImageAnimation.NONE;
+    private FastImageEnterTransition mEnterTransition = FastImageEnterTransition.TRANSITION_NONE;
+    private int mTransitionDuration = 500;
 
     public GlideUrl glideUrl;
 
@@ -51,6 +53,14 @@ class FastImageViewWithUrl extends AppCompatImageView {
 
     public void setAnimation(FastImageAnimation animation) {
         mAnimation = animation;
+    }
+
+    public void setEnterTransition(@Nullable FastImageEnterTransition transition) {
+        mEnterTransition = transition;
+    }
+
+    public void setTransitionDuration(int duration) {
+        mTransitionDuration = duration == 0 ? 500 : duration;
     }
 
     private boolean isNullOrEmpty(final String url) {
@@ -156,6 +166,10 @@ class FastImageViewWithUrl extends AppCompatImageView {
             
             if (key != null)
                 builder.listener(new FastImageRequestListener(key));
+
+            if (mEnterTransition != FastImageEnterTransition.TRANSITION_NONE) {
+                builder.transition(FastImageTransitions.getEnterTransition(mEnterTransition, mTransitionDuration));
+            }
 
             builder.into(this);
         }
