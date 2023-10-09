@@ -159,6 +159,13 @@ Headers to load the image with. e.g. `{ Authorization: 'someAuthToken' }`.
 
 ---
 
+### `animation?: enum`
+
+-   `FastImage.animation.none` **(Default)** - No animation in image loading.
+-   `FastImage.animation.fade` - Fade in animation in image loading.
+
+---
+
 ### `onLoadStart?: () => void`
 
 Called when the image starts to load.
@@ -203,6 +210,12 @@ A React Native style. Supports using `borderRadius`.
 
 If true will fallback to using `Image`.
 In this case the image will still be styled and laid out the same way as `FastImage`.
+
+---
+
+### `blurRadius?: number`
+
+The blur radius of the blur filter added to the image.
 
 ---
 
