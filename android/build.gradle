@@ -31,7 +31,7 @@ android {
     sourceSets {
         main {
             java {
-                if (safeExtGet('excludeAppGlideModule', false)) {
+                if (safeExtGet('excludeFastImageAppGlideModule', false)) {
                     srcDir "src"
                     exclude "**/FastImageGlideModule.java"
                 }

@@ -7,6 +7,6 @@ To accomplish this you can add to `android/build.gradle`:
 
 ```gradle
 project.ext {
-    excludeAppGlideModule = true
+    excludeFastImageAppGlideModule = true
 }
 ```
