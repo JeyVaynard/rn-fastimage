@@ -1,6 +1,6 @@
 {
     "name": "@james-kirawan/react-native-fast-image",
-    "version": "1.0.5",
+    "version": "2.0.0",
     "description": "🚩 FastImage, performant React Native image component.",
     "keywords": [
         "cache",
