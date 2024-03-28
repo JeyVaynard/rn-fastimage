@@ -176,6 +176,11 @@ export interface FastImageProps extends AccessibilityProps, ViewProps {
     testID?: string
 
     /**
+     * Show Console
+     */
+    showConsole?: boolean
+
+    /**
      * Render children within the image.
      */
     children?: React.ReactNode
@@ -220,6 +225,7 @@ function FastImageBase({
     // eslint-disable-next-line no-shadow
     resizeMode = 'cover',
     animation = 'none',
+    showConsole = false,
     forwardedRef,
     ...props
 }: FastImageProps & { forwardedRef: React.Ref<any> }) {
@@ -255,6 +261,12 @@ function FastImageBase({
         Platform.OS === 'android'
             ? Object.assign({}, resolvedSource, { blurRadius: blurRadius })
             : resolvedSource
+
+    if (showConsole) {
+        console.log('resolvedSource', resolvedSource)
+        console.log('resolveDefaultSource', resolvedDefaultSource)
+        console.log('resultSource', resultSource)
+    }
 
     return (
         <View style={[styles.imageContainer, style]} ref={forwardedRef}>
